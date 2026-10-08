@@ -1,8 +1,13 @@
 
 <?php
-
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
-
+Route::get('/a-propos', function () {
+    return view('a-propos', [
+        'auteur' => 'Prenom Nom',
+        'groupe' => 'MDW32',
+    ]);
+});
 Route::get('/', function () {
     return view('welcome');
 });
