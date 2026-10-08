@@ -21,3 +21,11 @@ Réponse :
 ## 5. Git Credential Manager
 
 Réponse :
+## 6. Historique depuis lab-01
+
+Nombre de commits depuis lab-01 :3
+
+Fichiers modifiés depuis lab-01 :2
+
+Ce que git tag -n affiche pour lab-01 :
+lab-01          Session 01 - Laravel baseline
