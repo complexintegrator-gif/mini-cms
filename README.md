@@ -12,20 +12,14 @@ Mini-CMS évoluera au fil du semestre vers une petite plateforme de publication 
 - Articles toujours stockés dans un tableau PHP, sans base de données pour l'instant.
 ## Routes disponibles
 
-## Routes disponibles
-
-| Méthode | URI | Réponse |
-|---|---|---|
-| GET | `/` | Vue `welcome` |
-| GET | `/bonjour` | Message de bienvenue |
-| GET | `/bonjour-court` | Même message avec une fonction fléchée |
-| GET | `/bienvenue` | Vue `bienvenue` avec étudiant, groupe et cours |
-| GET | `/version` | Version de Laravel et PHP |
-| GET | `/heure` | Vue `heure` |
-
-- Routes en closures : `/`, `/bonjour`, `/bonjour-court`, `/bienvenue`, `/version`, `/heure` et `/a-propos`.
-- Vues Blade : `bienvenue`, `heure` et `a-propos`.
-- Base de données SQLite locale (`database/database.sqlite`, non versionnée).
+| Méthode | URI | Nom | Action |
+|---|---|---|---|
+| GET | `/` | `home` | `PageController@home` |
+| GET | `/a-propos` | `about` | `PageController@about` |
+| GET | `/heure` | `time` | `PageController@time` |
+| GET | `/posts` | `posts.index` | `PostController@index` |
+| GET | `/posts/archive/{year}` | `posts.archive` | `PostController@archive` |
+| GET | `/posts/{slug}` | `posts.show` | `PostController@show` |
 
 ## Prérequis
 
