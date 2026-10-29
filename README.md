@@ -10,12 +10,19 @@ Mini-CMS évoluera au fil du semestre vers une petite plateforme de publication 
 - Pages construites avec des composants Blade anonymes : `x-navbar`, `x-nav-link`, `x-post-card`, `x-alert`, `x-page-header`.
 - Lien actif dans la navigation avec `request()->routeIs()`.
 - Articles toujours stockés dans un tableau PHP, sans base de données pour l'instant.
-## État actuel (tag lab-03)
+ État actuel (tag lab-03)
 
 - Articles enregistrés dans une base SQLite et lus avec le modèle Eloquent `Post`.
 - Table `posts` créée par une migration : après un clone, `php artisan migrate` la recrée (vide).
 - Liste paginée, détail par liaison modèle-route, formulaire de création avec validation côté serveur.
 - Premiers tests Pest : `php artisan test`.
+## État actuel (tag lab-03b)
+
+- CRUD complet des articles : liste, détail, création, modification, suppression avec confirmation.
+- Colonne `excerpt` ajoutée par une nouvelle migration.
+- Scope `published` utilisé sur l'accueil et l'archive.
+- Tests Pest des lectures (`PostPagesTest`) et des écritures (`PostWriteTest`) : `php artisan test`.
+
 ## Routes disponibles
 
 | Méthode | URI | Nom | Action |
@@ -28,6 +35,10 @@ Mini-CMS évoluera au fil du semestre vers une petite plateforme de publication 
 | GET | `/posts/create` | `posts.create` | `PostController@create` |
 | POST | `/posts` | `posts.store` | `PostController@store` |
 | GET | `/posts/{post}` | `posts.show` | `PostController@show` |
+| GET | `/posts/{post}/edit` | `posts.edit` | `PostController@edit` |
+| PUT | `/posts/{post}` | `posts.update` | `PostController@update` |
+| DELETE | `/posts/{post}` | `posts.destroy` | `PostController@destroy` |
+| PATCH | `/posts/{post}/publication` | `posts.publication` | `PostController@togglePublication` |
 
 ## Prérequis
 
@@ -49,7 +60,7 @@ php artisan key:generate
 touch database/database.sqlite
 php artisan migrate
 composer run dev
-```
+```##
 
 ### PowerShell (Windows)
 
@@ -87,3 +98,8 @@ Ouvrir ensuite http://localhost:8000 (adresse de l'application, différente de l
 ### Session 04
 
 ![Liste des articles](screenshots/s04-articles.png)
+### Session 06
+
+![Formulaire de modification prérempli](screenshots/s06-modification.png)
+
+![Confirmation de suppression](screenshots/s06-suppression.png)
