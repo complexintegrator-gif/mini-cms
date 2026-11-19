@@ -43,6 +43,26 @@ it('shows the edit form with the current values', function () {
         ->assertSee('Titre initial');
 });
 
+it('allows safe post routes while the site is read only', function () {
+    config(['site.read_only' => true]);
+
+    $this->get(route('posts.create'))->assertOk();
+});
+
+it('returns 503 without updating a post when the site is read only', function () {
+    $post = Post::create(postData(['title' => 'Titre initial']));
+
+    config(['site.read_only' => true]);
+
+    $this->put(route('posts.update', $post), postData(['title' => 'Titre modifie']))
+        ->assertStatus(503);
+
+    $this->assertDatabaseHas('posts', [
+        'id' => $post->id,
+        'title' => 'Titre initial',
+    ]);
+});
+
 it('updates a post and keeps its own slug', function () {
     $post = Post::create(postData());
 

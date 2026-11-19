@@ -11,5 +11,11 @@ Route::get('/heure', [PageController::class, 'time'])->name('time');
 Route::get('/posts/archive/{year}', [PostController::class, 'archive'])
     ->whereNumber('year')
     ->name('posts.archive');
+Route::get('/posts/categorie/{category:slug}', [PostController::class, 'byCategory'])->name('posts.category');
+Route::get('/posts/tag/{tag:slug}', [PostController::class, 'byTag'])->name('posts.tag');
 
-Route::resource('posts', PostController::class);
+Route::middleware('writable')->group(function (): void {
+    Route::resource('posts', PostController::class);
+    Route::patch('/posts/{post}/publication', [PostController::class, 'togglePublication'])
+        ->name('posts.publication');
+});
